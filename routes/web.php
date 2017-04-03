@@ -11,6 +11,7 @@
 |
 */
 use App\Task;
+use Mail;
 use Illuminate\Http\Request;
 
 /**
@@ -41,6 +42,11 @@ Route::post('/task', function(Request $request) {
     $task = new Task;
     $task->name = $request->name;
     $task->save();
+
+    Mail::send('emails.reminder', ['task' => 'this is an email'], function($message) {
+        $message->from('test-user-success@andela.com', 'Test Success');
+        $message->to('test-user-fellow@andela.com')->subject('Test email');
+    });
 
 
     return redirect('/');
