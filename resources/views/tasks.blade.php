@@ -8,7 +8,7 @@
 
         <!--New Task form -->
         <form action="/task" method="POST" class="form-horizontal">
-            {{ crsf_field() }}
+            {{ csrf_field() }}
             
             <div class="form-group">
                 <label for="task" class="col-sm-3 control-label"></label>
