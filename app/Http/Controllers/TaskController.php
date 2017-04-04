@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Task;
 use Illuminate\Http\Request;
+use Mail;
 
 class TaskController extends Controller
 {
@@ -31,6 +32,10 @@ class TaskController extends Controller
         $task->name = $request->name;
         $task->save();
 
+        Mail::raw('this is an email', function($message) {
+            $message->from('onboarding@andela.com', 'Test Success');
+            $message->to('alex.kiura@andela.com')->subject('Test email');
+        });
         return redirect('/');
     }
 }

@@ -22,10 +22,6 @@ Route::get('/', 'TaskController@listTasks');
 * Add a new task
 */
 Route::post('/task', 'TaskController@createTask');
-    // Mail::send('emails.reminder', ['task' => 'this is an email'], function($message) {
-    //     $message->from('test-user-success@andela.com', 'Test Success');
-    //     $message->to('test-user-fellow@andela.com')->subject('Test email');
-    // });
 
 /**
 * Delete an existing task
