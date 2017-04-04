@@ -21,30 +21,11 @@ Route::get('/', 'TaskController@listTasks');
 /**
 * Add a new task
 */
-Route::post('/task', function(Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' =>'required|max:255',
-    ]);
-
-    if ($validator->fails() ) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-
-    $task = new Task;
-    $task->name = $request->name;
-    $task->save();
-
+Route::post('/task', 'TaskController@createTask');
     // Mail::send('emails.reminder', ['task' => 'this is an email'], function($message) {
     //     $message->from('test-user-success@andela.com', 'Test Success');
     //     $message->to('test-user-fellow@andela.com')->subject('Test email');
     // });
-
-
-    return redirect('/');
-
-});
 
 /**
 * Delete an existing task
