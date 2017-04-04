@@ -11,19 +11,12 @@
 |
 */
 use App\Task;
-use Mail;
 use Illuminate\Http\Request;
 
 /**
 * Display all tasks
 */
-Route::get('/', function () {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
-
-    return view('tasks', [
-        'tasks' => $tasks
-    ]);
-});
+Route::get('/', 'TaskController@listTasks');
 
 /**
 * Add a new task
@@ -43,10 +36,10 @@ Route::post('/task', function(Request $request) {
     $task->name = $request->name;
     $task->save();
 
-    Mail::send('emails.reminder', ['task' => 'this is an email'], function($message) {
-        $message->from('test-user-success@andela.com', 'Test Success');
-        $message->to('test-user-fellow@andela.com')->subject('Test email');
-    });
+    // Mail::send('emails.reminder', ['task' => 'this is an email'], function($message) {
+    //     $message->from('test-user-success@andela.com', 'Test Success');
+    //     $message->to('test-user-fellow@andela.com')->subject('Test email');
+    // });
 
 
     return redirect('/');
